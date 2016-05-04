@@ -9,7 +9,7 @@ class Humidity(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.humity_level
+        return str(self.humity_level)
 
 
 class Temperature(models.Model):
@@ -17,12 +17,17 @@ class Temperature(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return self.temperature
+        return str(self.temperature)
+
 
 class Location(models.Model):
     location = models.CharField(max_length=50)
     location_long_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
+
+    def __str__(self):
+        return self.location
+
 
 class Record(models.Model):
     humidity = models.ForeignKey(Humidity, on_delete=models.CASCADE)
@@ -31,7 +36,7 @@ class Record(models.Model):
     pub_date = models.DateTimeField('date published')
 
     def __str__(self):
-        return 'Humidity: ' + self.humidity +\
-            'Temperature: ' + self.temperature+\
-            'Location: ' + self.location+\
-            'Date: ' + self.pub_date
+        return 'Humidity: ' + self.humidity.__str__() + \
+            'Temperature: ' + self.temperature.__str__() + \
+            'Location: ' + self.location.__str__() + \
+            'Date: ' + self.pub_date.__str__()
